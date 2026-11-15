@@ -10,43 +10,13 @@ A RESTful **Product Inventory API** built with **Node.js, Express 5, Prisma ORM,
 
 | Layer | Technology |
 
- Runtime | Node.js (ES Modules) |
+ Runtime | Node.js (ES Modules) 
  Server | Express 5 |
- ORM | Prisma 7 (`prisma-client` generator, ESM) |
+ ORM | Prisma 7
  Database | PostgreSQL 18 |
- Driver | `pg` via `@prisma/adapter-pg` |
- Dev runner | `tsx` |
- Local DB | Docker Compose (`postgres:18`) |
 
 
 
-## Project Structure
-
-```text
-postgresql-note/
-├── compose.yaml                 # Docker Compose PostgreSQL service
-├── prisma.config.ts             # Prisma CLI config (datasource url from env)
-├── prisma/
-│   ├── schema.prisma            # Product model + datasource/generator
-│   └── migrations/
-│       └── 20261111151730_create_product_table/
-│           └── migration.sql    # Creates the Product table + indexes
-├── src/
-│   ├── index.js                 # Express app entry point
-│   ├── config/
-│   │   └── prisma.js            # PrismaClient + pg adapter
-│   ├── controllers/
-│   │   └── productController.js # CRUD + filtering/pagination logic
-│   ├── routes/
-│   │   └── productRoutes.js     # /api/products routes
-│   ├── middleware/
-│   │   └── errorMiddleware.js   # Centralized Prisma-aware error handler
-│   └── generated/prisma/        # Prisma-generated client (do not edit)
-├── package.json
-└── README.md
-```
-
----
 
 ## Data Model
 
@@ -83,20 +53,11 @@ docker compose up -d
 ```
 
 This starts a PostgreSQL 18 container:
-
-- Host/port: `127.0.0.1:5433`
-- User: `inventory_user`
-- Password: `inventory_password`
-- Database: `product_inventory`
-
 ### 3. Configure environment variables
 
 Create a `.env` file in the project root:
 
-```env
-DATABASE_URL="postgresql://inventory_user:inventory_password@localhost:5433/product_inventory?schema=public"
-PORT=5000
-```
+
 
 > `DATABASE_URL` is read by `prisma.config.ts` and by `src/config/prisma.js`. `.env` is already listed in `.gitignore`, so it will not be committed.
 
@@ -117,13 +78,11 @@ npm run dev
 npm start
 ```
 
-Server runs at `http://localhost:5000` (uses `PORT` from `.env`; falls back to `3000` if unset).
-
 ---
 
 ## API Endpoints
 
-Base URL: `http://localhost:5000/api/products`
+
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
